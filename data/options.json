@@ -1,0 +1,26 @@
+{
+    "Produção": "opt_02",
+    "Processamento": {
+        "opcao": "opt_03",
+        "Viniferas": "ubopt_01",
+        "Americanas e Hibridas": "subopt_02",
+        "Uvas de Mesa": "subopt_03",
+        "Sem classificação": "subopt_04"
+    },
+    "Comercialização": "opt_04",
+    "Importação": {
+        "opcao": "opt_05",
+        "Vinhos de mesa": "subopt_01",
+        "Espumantes": "subopt_02",
+        "Uvas frescas": "subopt_03",
+        "Uvas passas": "subopt_04",
+        "Suco de uva": "subopt_05"
+    },
+    "Exportação": {
+        "opcao": "opt_06",
+        "Vinhos de mesa": "subopt_01",
+        "Espumantes": "subopt_02",
+        "Uvas frescas": "subopt_03",
+        "Suco de uva": "subopt_04"
+    }
+}

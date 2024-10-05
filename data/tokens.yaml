@@ -1,0 +1,12 @@
+SECRET_KEY: "thisisasecretkey"
+ALGORITHM: "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES: 300
+
+users:
+  - username: "test"
+    password: "test"
+    roles: ["admin"]
+  
+  - username: "user2"
+    password: "strongpassword2"
+    roles: ["user"]
