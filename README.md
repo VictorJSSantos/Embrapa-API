@@ -22,4 +22,4 @@ Seus objetivos incluem:
 
 * Criar um plano para fazer o deploy da API, desenhando a arquitetura do projeto desde a ingestão até a alimentação do modelo (aqui não é necessário elaborar um modelo de ML, mas é preciso que vocês escolham um cenário interessante em que a API possa ser utilizada). --> *Precisa de validação*
 
-• Fazer um MVP realizando o deploy com um link compartilhável e um repositório no github. --> *Feito*
+* Fazer um MVP realizando o deploy com um link compartilhável e um repositório no github. --> *Feito*
