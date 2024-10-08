@@ -31,21 +31,6 @@ def load_credentials():
         )
 
 
-def criar_link(ano, area, subarea=None):
-    if not subarea:
-        # print(f"o ano é {ano}, a area {area} e a subarea é {subarea}")
-        # URL da página que você quer acessar
-        print("caso 1 - sem subarea")
-        url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?ano={ano}&opcao={area}"
-        return url
-
-    else:
-        print("caso 2 - COM subarea")
-        # print(f"o ano é {ano}, a area {area} e a subarea é {subarea}")
-        url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao={subarea}&ano={ano}&opcao={area}"
-        return url
-
-
 """
 Rotas de Autorização
 """
