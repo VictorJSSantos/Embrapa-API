@@ -1,16 +1,12 @@
 """Essa será a Classe Requisition HTTP"""
 
 import requests
-from json import load
 from http import HTTPStatus
-
-OPCOES = load(open("./data/options.json"))
 
 
 class Requisition:
     def __init__(self):  # , ano, area, subarea, url
         self.url = None
-        self.opcoes = OPCOES
         self.ano = None
         self.area = None
         self.subarea = None

@@ -59,7 +59,7 @@ def create_jwt_token(username: str, password: str):
 # Função para verificar o token JWT
 def verify_jwt_token(token: str):
     try:
-        print(f"Verificando token: {token}")  # Para debugging
+        # print(f"Verificando token: {token}")  # Para debugging
         payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         return payload  # ["sub"]  # Retorna o username do token
     except jwt.ExpiredSignatureError:
@@ -69,13 +69,13 @@ def verify_jwt_token(token: str):
         raise HTTPException(status_code=401, detail="Token inválido.")
 
 
-@app.get("/")
+@app.get("/", tags=["Default"])
 async def route_default():
     return "Aqui é a API Embrapa"
 
 
 # Rota para login que retorna o token JWT
-@app.post("/token")
+@app.post("/token", tags=["Login"])
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
     """
     Rota de login que valida as credenciais e retorna um token JWT.
@@ -98,25 +98,20 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 # Rota protegida que retorna informações do usuário com base no token JWT
-@app.get("/users/login/token", dependencies=[Depends(BearerToken())])
+@app.get(
+    "/users/login/token",
+    dependencies=[Depends(BearerToken())],
+    tags=["Login"],
+)
 def read_users_me(token: str = Depends(BearerToken())):
     """
     Rota protegida que retorna as informações do usuário.
     """
     payload = verify_jwt_token(token.credentials)  # Aqui pegamos o token correto
 
-    # # Buscar os dados do usuário com base no nome de usuário do token
-    # user_data = next(
-    #     (user for user in credentials["users"] if user["username"] == username), None
-    # )
-
-    # if not user_data:
-    #     raise HTTPException(status_code=400, detail="Usuário não encontrado.")
-
     return {
         "payload": payload,
-    }  # "roles": user_data["roles"]}
-    # return f"The user {username} is authenticated!"
+    }
 
 
 """
@@ -124,10 +119,18 @@ Rotas da API
 """
 
 
-@app.get("/consulta/producao/{ano}/token", dependencies=[Depends(BearerToken())])
+@app.get(
+    "/consulta/producao/{ano}/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Produção de vinhos, sucos e derivados do Rio Grande do Sul por ano",
+    tags=["Produção"],
+)
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
 ):
+    """
+    Rota protegida que irá retornar os dados de Produção
+    """
 
     area = ProducaoModelo("Produção")
     area = str(area.name)
@@ -141,11 +144,18 @@ async def get_data(
     return data
 
 
-@app.get("/consulta/comercializacao/{ano}/token", dependencies=[Depends(BearerToken())])
+@app.get(
+    "/consulta/comercializacao/{ano}/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Comercialização de vinhos e derivados no Rio Grande do Sul por ano",
+    tags=["Comercialização"],
+)
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
 ):
-
+    """
+    Rota protegida que irá retornar os dados de Comercialização
+    """
     area = ComercializacaoModelo("Comercialização")
     area = str(area.name)
     subarea = None
@@ -158,13 +168,21 @@ async def get_data(
     return data
 
 
-@app.get("/consulta/processamento/{subarea}/{ano}/token")  # response_class=HTMLResponse
+@app.get(
+    "/consulta/processamento/{subarea}/{ano}/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Quantidade de uvas processadas no Rio Grande do Sul por ano",
+    tags=["Processamento"],
+)  # response_class=HTMLResponse
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
     subarea: Annotated[
         (ProcessamentoSubModelo | None), Path(title="Selecione a subárea de interessse")
     ],
 ):
+    """
+    Rota protegida que irá retornar os dados de Processamento
+    """
 
     processamento = ProcessamentoModelo("Processamento")
     processamento = str(processamento.name)
@@ -178,14 +196,21 @@ async def get_data(
     return data
 
 
-@app.get("/consulta/importacao/{subarea}/{ano}/token")  # response_class=HTMLResponse
+@app.get(
+    "/consulta/importacao/{subarea}/{ano}/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Importação de derivados de uva por ano",
+    tags=["Importação"],
+)
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
     subarea: Annotated[
         (ImportacaoSubModelo | None), Path(title="Selecione a subárea de interessse")
     ],
 ):
-
+    """
+    Rota protegida que irá retornar os dados de Importação
+    """
     processamento = ImportacaoModelo("Importação")
     processamento = str(processamento.name)
     subarea = str(subarea.name)
@@ -198,14 +223,21 @@ async def get_data(
     return data
 
 
-@app.get("/consulta/exportacao/{subarea}/{ano}/token")  # response_class=HTMLResponse
+@app.get(
+    "/consulta/exportacao/{subarea}/{ano}/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Exportação de derivados de uva por ano",
+    tags=["Exportação"],
+)
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
     subarea: Annotated[
         (ExportacaoSubModelo | None), Path(title="Selecione a subárea de interessse")
     ],
 ):
-
+    """
+    Rota protegida que irá retornar os dados de Exportação
+    """
     processamento = ExportacaoModelo("Exportação")
     processamento = str(processamento.name)
     subarea = str(subarea.name)
