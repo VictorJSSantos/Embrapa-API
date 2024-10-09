@@ -254,3 +254,105 @@ async def get_data(
     data = extrair.formatar_dados(data)
 
     return data
+
+
+"""
+Rotas de API que coletam dados de TODOS os anos
+"""
+
+
+@app.get(
+    "/consulta/producao/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Produção de <b>todos os anos</b>",
+    tags=["Produção"],
+    summary="Obter dados de todos os anos de Produção",
+)
+async def get_data():
+    """
+    Rota protegida que irá retornar todos os dados de Produção
+    """
+    area = ProducaoModelo("Produção")
+    area = str(area.name)
+    # subarea = str(subarea.name)
+    resultados = extrair.consultar_todo_periodo(
+        area=area,
+    )
+
+    return resultados
+
+
+@app.get(
+    "/consulta/comercializacao/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Comercialização de <b>todos os anos</b>",
+    tags=["Comercialização"],
+    summary="Obter dados de todos os anos de Comercialização",
+)
+async def get_data():
+    """
+    Rota protegida que irá retornar todos os dados de Comercialização
+    """
+    area = ComercializacaoModelo("Comercialização")
+    area = str(area.name)
+    resultados = extrair.consultar_todo_periodo(
+        area=area,
+    )
+
+    return resultados
+
+
+@app.get(
+    "/consulta/processamento/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Processamento de <b>todos os anos</b>",
+    tags=["Processamento"],
+    summary="Obter dados de todos os anos de Processamento",
+)
+async def get_data():
+    """
+    Rota protegida que irá retornar todos os dados de Processamento
+    """
+    area = ProcessamentoModelo("Processamento")
+    area = str(area.name)
+    resultados = extrair.consultar_todas_as_areas(
+        area=area, Model=ProcessamentoSubModelo
+    )
+
+    return resultados
+
+
+@app.get(
+    "/consulta/importacao/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Importação de <b>todos os anos</b>",
+    tags=["Importação"],
+    summary="Obter dados de todos os anos de Importação",
+)
+async def get_data():
+    """
+    Rota protegida que irá retornar todos os dados de Importação
+    """
+    area = ImportacaoModelo("Importação")
+    area = str(area.name)
+    resultados = extrair.consultar_todas_as_areas(area=area, Model=ImportacaoSubModelo)
+
+    return resultados
+
+
+@app.get(
+    "/consulta/exportacao/token",
+    dependencies=[Depends(BearerToken())],
+    description="Requisitar dados de Exportação de <b>todos os anos</b>",
+    tags=["Exportação"],
+    summary="Obter dados de todos os anos de Exportação",
+)
+async def get_data():
+    """
+    Rota protegida que irá retornar todos os dados de Exportação
+    """
+    area = ExportacaoModelo("Exportação")
+    area = str(area.name)
+    resultados = extrair.consultar_todas_as_areas(area=area, Model=ExportacaoSubModelo)
+
+    return resultados

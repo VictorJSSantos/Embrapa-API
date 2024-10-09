@@ -22,13 +22,13 @@ class Requisition:
 
     def criar_link(self, ano, area, subarea=None):
         if not subarea:
-            print("caso 1 - sem subarea")
+            # print("caso 1 - sem subarea")
             url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?ano={ano}&opcao={area}"
             self.url = url
             return self.url
 
         else:
-            print("caso 2 - COM subarea")
+            # print("caso 2 - COM subarea")
             url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao={subarea}&ano={ano}&opcao={area}"
             self.url = url
             return self.url

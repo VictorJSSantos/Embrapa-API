@@ -12,6 +12,7 @@ partir daqui e sobrescrever suas funcionalidades
 
 """
 
+from utils.basemodel import *
 from utils.extrair import Requisition
 from json import load
 from bs4 import BeautifulSoup
@@ -37,11 +38,11 @@ class Extractor(Requisition):
         self.dados.clear()
 
     def get_dados(self, url):
-        data = super().requisicao_get(url)
-        return data
+        response = super().requisicao_get(url)
+        return response
 
-    def formatar_dados(self, data):
-        soup = BeautifulSoup(data, "html.parser")
+    def formatar_dados(self, response):
+        soup = BeautifulSoup(response, "html.parser")
         soup = soup.find("thead").parent
         headers = ["category"]
         # Inicializa uma lista para armazenar os resultados
@@ -68,7 +69,7 @@ class Extractor(Requisition):
 
             df = pd.DataFrame(tds_em_trs)
 
-        print(len(df.columns))
+        # print(len(df.columns))
 
         if len(headers) == 2:
             tds_em_trs.append(
@@ -84,9 +85,51 @@ class Extractor(Requisition):
                 tds_em_trs, columns=["País", "Quantidade (L.)", "Valor (US$)"]
             )
 
-        # df = df[1:]
-        # df["Ano"] = data["ano"]
-        # df["area"] = data["area"]
-        # df["subarea"] = data["subarea"]
-
         return df
+
+    def consultar_todo_periodo(self, area, subarea=None):
+        lista_de_periodos = [i for i in range(1970, 1974)]
+        df = None
+
+        for i in lista_de_periodos:
+            url = self.criar_link(
+                ano=i, area=area, subarea=subarea
+            )  # Criar a URL para cada ano (o que muda a URL)
+
+            # Preparação dos dados para criação do DataFrame
+            data = self.get_dados(url=url)
+            data = self.formatar_dados(data)
+            data["Ano"] = i
+            # data["Area"] = area
+
+            if df is None:
+                df = pd.DataFrame(data)
+            else:
+                df = pd.concat(
+                    [df, pd.DataFrame(data)], ignore_index=True
+                )  # Concatenação dos resultados ao DataFrame com todos os dados
+
+        json = df.to_dict(
+            orient="dict"
+        )  # Transformação em JSON final após o loop para não quebrar a API
+        return json
+
+    def consultar_todas_as_areas(self, area, Model):
+        lista_de_subareas = [submodel.name for submodel in Model]
+        df = None
+        for subarea in lista_de_subareas:
+            data = self.consultar_todo_periodo(area=area, subarea=subarea)
+            data = pd.DataFrame.from_dict(data)
+            data["Subarea"] = Model[subarea].value
+
+            if df is None:
+                df = pd.DataFrame(data)
+            else:
+                df = pd.concat(
+                    [df, pd.DataFrame(data)], ignore_index=True
+                )  # Concatenação dos resultados ao DataFrame com todos os dados
+
+        json = df.to_dict(
+            orient="dict"
+        )  # Transformação em JSON final após o loop para não quebrar a API
+        return json
