@@ -69,13 +69,13 @@ def verify_jwt_token(token: str):
         raise HTTPException(status_code=401, detail="Token inválido.")
 
 
-@app.get("/", tags=["Default"])
+@app.get("/", tags=["Default"], summary="Página Inicial")
 async def route_default():
     return "Aqui é a API Embrapa"
 
 
 # Rota para login que retorna o token JWT
-@app.post("/token", tags=["Login"])
+@app.post("/token", tags=["Login"], summary="Enviar dados de usuário para fazer login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):
     """
     Rota de login que valida as credenciais e retorna um token JWT.
@@ -102,6 +102,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
     "/users/login/token",
     dependencies=[Depends(BearerToken())],
     tags=["Login"],
+    summary="Obter dados do usuário validado",
 )
 def read_users_me(token: str = Depends(BearerToken())):
     """
@@ -124,6 +125,7 @@ Rotas da API
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Produção de vinhos, sucos e derivados do Rio Grande do Sul por ano",
     tags=["Produção"],
+    summary="Obter dados de Produção",
 )
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
@@ -149,6 +151,7 @@ async def get_data(
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Comercialização de vinhos e derivados no Rio Grande do Sul por ano",
     tags=["Comercialização"],
+    summary="Obter dados de Comercialização",
 )
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
@@ -173,7 +176,8 @@ async def get_data(
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Quantidade de uvas processadas no Rio Grande do Sul por ano",
     tags=["Processamento"],
-)  # response_class=HTMLResponse
+    summary="Obter dados de Pocessamento",
+)
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
     subarea: Annotated[
@@ -201,6 +205,7 @@ async def get_data(
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Importação de derivados de uva por ano",
     tags=["Importação"],
+    summary="Obter dados de Importação",
 )
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
@@ -228,6 +233,7 @@ async def get_data(
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Exportação de derivados de uva por ano",
     tags=["Exportação"],
+    summary="Obter dados de Exportação",
 )
 async def get_data(
     ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
