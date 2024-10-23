@@ -72,8 +72,6 @@ class Transform(Requisition):
 
         df = pd.DataFrame(tds_em_trs)
 
-        # print(len(df.columns))
-
         if len(headers) == 2:
             tds_em_trs.append(
                 tds_formatados + [category[-1] if category else None]
@@ -112,11 +110,13 @@ class Transform(Requisition):
 
         return response
 
-    async def consultar_todas_as_areas(self, area, Model):
-        data = {}
-        lista_de_subareas = [subarea.name for subarea in Model]
-        for subarea in lista_de_subareas:
-            response = await self.consultar_todo_periodo(area=area, subarea=subarea)
-            data[f"{str(Model[subarea].value)}"] = response
+    async def consultar_todas_as_areas(self, area, SubModel):
+        data = []
 
+        for subarea in SubModel:
+            response = await self.consultar_todo_periodo(
+                area=area, subarea=subarea.name
+            )
+            data[f"{subarea.name}"] = response
+            # data.append(response)
         return data

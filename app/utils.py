@@ -12,7 +12,15 @@ from bs4 import BeautifulSoup
 from utils.transformar import Extractor
 from utils.extrair import Requisition
 from utils.basemodel import *
+
+# from app.constants import *
 from typing import Annotated
+
+
+# # Classe para autenticação Bearer
+# class BearerToken(HTTPBearer):
+#     def __init__(self):
+#         super().__init__()
 
 
 # Carregar as credenciais dos usuários do arquivo tokens.yaml
@@ -26,8 +34,8 @@ def load_credentials():
         )
 
 
-credentials = load_credentials()
-SECRET_KEY = credentials["SECRET_KEY"]
+CREDENTIALS = load_credentials()
+SECRET_KEY = CREDENTIALS["SECRET_KEY"]
 
 
 # Função para criar o token JWT
@@ -52,3 +60,15 @@ def verify_jwt_token(token: str):
     except jwt.InvalidTokenError as e:
         print(f"Erro ao validar token: {e}")  # Para debugging
         raise HTTPException(status_code=401, detail="Token inválido.")
+
+
+def retornar_name_do_model(Model):
+    model_names = [opt.name for opt in Model]
+    return model_names[0]
+
+
+def transformar_dados_de_url_em_string(ano, area, subarea=None):
+    if subarea:
+        return str(ano), str(area), str(subarea)
+    else:
+        return str(ano), str(area), None
