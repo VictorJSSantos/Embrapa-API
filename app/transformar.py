@@ -12,14 +12,15 @@ partir daqui e sobrescrever suas funcionalidades
 
 """
 
-from utils.basemodel import *
-from utils.extrair import Requisition
+from app.models import *
+from app.requisicao_http import Requisition
 from json import load
 from bs4 import BeautifulSoup
 import pandas as pd
+import httpx
 
 
-class Extractor(Requisition):
+class Transform(Requisition):
 
     def __init__(self):
         super().__init__()
@@ -37,16 +38,18 @@ class Extractor(Requisition):
     def limpar_lista(self):
         self.dados.clear()
 
-    def get_dados(self, url):
-        response = super().requisicao_get(url)
+    async def get_dados(self, url):
+        response = await super().requisicao_get(url)
         return response
 
     def formatar_dados(self, response):
         soup = BeautifulSoup(response, "html.parser")
         soup = soup.find("thead").parent
+        # df = pd.DataFrame()
         headers = ["category"]
         # Inicializa uma lista para armazenar os resultados
         tds_em_trs = []
+        df = pd.DataFrame()
         # Inicializando a lista de categorias
         category = []
 
@@ -67,7 +70,7 @@ class Extractor(Requisition):
 
             tds_em_trs.append(tds_formatados)
 
-            df = pd.DataFrame(tds_em_trs)
+        df = pd.DataFrame(tds_em_trs)
 
         # print(len(df.columns))
 
@@ -87,50 +90,33 @@ class Extractor(Requisition):
 
         return df
 
-    def consultar_todo_periodo(self, area, subarea=None):
+    async def consultar_todo_periodo(self, area, subarea=None):
         ############################# AQUI TEM QUE AJUSTAR O PERÌODO PARA 2023 ##################################
-        lista_de_periodos = [i for i in range(1970, 1974)]
+        lista_de_periodos = [i for i in range(1970, 1972)]
         ################################################# AJUSTAR ###############################################
-        df = None
 
-        for i in lista_de_periodos:
-            url = self.criar_link(
-                ano=i, area=area, subarea=subarea
-            )  # Criar a URL para cada ano (o que muda a URL)
+        urls = [
+            self.criar_link(ano=ano, area=area, subarea=subarea)
+            for ano in lista_de_periodos
+        ]
+        response = {}
 
-            # Preparação dos dados para criação do DataFrame
-            data = self.get_dados(url=url)
+        for ano, url in zip(lista_de_periodos, urls):
+            data = await self.get_dados(url=url)
+            if data is None:
+                print(f"Dados não encontrados para o ano {ano}. URL: {url}")
+                continue  # Pula para o próximo ano se não houver dados
             data = self.formatar_dados(data)
-            data["Ano"] = i
 
-            if df is None:
-                df = pd.DataFrame(data)
-            else:
-                df = pd.concat(
-                    [df, pd.DataFrame(data)], ignore_index=True
-                )  # Concatenação dos resultados ao DataFrame com todos os dados
+            response[f"{ano}"] = data
 
-        json = df.to_dict(
-            orient="dict"
-        )  # Transformação em JSON final após o loop para não quebrar a API
-        return json
+        return response
 
-    def consultar_todas_as_areas(self, area, Model):
-        lista_de_subareas = [submodel.name for submodel in Model]
-        df = None
+    async def consultar_todas_as_areas(self, area, Model):
+        data = {}
+        lista_de_subareas = [subarea.name for subarea in Model]
         for subarea in lista_de_subareas:
-            data = self.consultar_todo_periodo(area=area, subarea=subarea)
-            data = pd.DataFrame.from_dict(data)
-            data["Subarea"] = Model[subarea].value
+            response = await self.consultar_todo_periodo(area=area, subarea=subarea)
+            data[f"{str(Model[subarea].value)}"] = response
 
-            if df is None:
-                df = pd.DataFrame(data)
-            else:
-                df = pd.concat(
-                    [df, pd.DataFrame(data)], ignore_index=True
-                )  # Concatenação dos resultados ao DataFrame com todos os dados
-
-        json = df.to_dict(
-            orient="dict"
-        )  # Transformação em JSON final após o loop para não quebrar a API
-        return json
+        return data
