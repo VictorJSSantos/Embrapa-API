@@ -12,12 +12,13 @@ partir daqui e sobrescrever suas funcionalidades
 
 """
 
-from app.models import *
-from app.requisicao_http import Requisition
 from json import load
 from bs4 import BeautifulSoup
 import pandas as pd
-import httpx
+
+
+from app.models import *
+from app.requisicao_http import Requisition
 
 
 class Transform(Requisition):

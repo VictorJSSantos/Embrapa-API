@@ -1,26 +1,10 @@
-# from utils.functions import *
-import jwt
 import datetime
+from fastapi import HTTPException
+import jwt
 import yaml
-from fastapi import FastAPI, HTTPException, Depends, Path
-from fastapi.security import OAuth2PasswordRequestForm, HTTPBearer
-from bs4 import BeautifulSoup
 
-# from typing import Optional
-# import requests
-# from fastapi.responses import HTMLResponse
-# from app.transformar import Transform
-# from app.requisicao_http import Requisition
+
 from app.models import *
-
-# from app.constants import *
-from typing import Annotated
-
-
-# # Classe para autenticação Bearer
-# class BearerToken(HTTPBearer):
-#     def __init__(self):
-#         super().__init__()
 
 
 # Carregar as credenciais dos usuários do arquivo tokens.yaml

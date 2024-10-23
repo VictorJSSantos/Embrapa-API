@@ -4,8 +4,12 @@ from fastapi.security import (
     HTTPAuthorizationCredentials,
 )
 from fastapi import HTTPException, Depends, APIRouter
+from typing import Annotated
+
+
 from app.utils import *  # create_jwt_token, verify_jwt_token,
 from app.schemas import TokenResponse, UserPayload
+
 
 router = APIRouter()
 
