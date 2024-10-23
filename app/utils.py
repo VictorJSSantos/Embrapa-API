@@ -9,9 +9,9 @@ from bs4 import BeautifulSoup
 # from typing import Optional
 # import requests
 # from fastapi.responses import HTMLResponse
-from utils.transformar import Extractor
-from utils.extrair import Requisition
-from utils.basemodel import *
+# from app.transformar import Transform
+# from app.requisicao_http import Requisition
+from app.models import *
 
 # from app.constants import *
 from typing import Annotated
