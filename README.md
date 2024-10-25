@@ -1,5 +1,5 @@
 # Visão Geral | Overview 
-Essa é um projeto de uma API que está sendo construída para acessar os dados da Embrapa referentes ao processo produtivo (E outras informações também, consulte o link para saber exatamente quais) de uvas no Estado do Rio Grande do Sul, neste ![link](http://vitibrasil.cnpuv.embrapa.br/).git 
+Essa é um projeto de uma API que está sendo construída para acessar os dados da Embrapa referentes ao processo produtivo (E outras informações também, consulte o link para saber exatamente quais) de uvas no Estado do Rio Grande do Sul, neste ![link](http://vitibrasil.cnpuv.embrapa.br/).
 O projeto é feito para a entrega do primeiro módulo do curso de pós-graduação da FIAP em Machine Learning Engineering.
 
 Este projeto é fruto do aprendizado do primeiro módulo da pós-graduação, que envolvia, entre outros tópicos:
