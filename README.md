@@ -48,8 +48,7 @@ De forma geral, a arquitetura da API é a seguinte:
 ![Arquitetura da API Embrapa](https://github.com/VictorJSSantos/Modulo-1/blob/main/API%20-%20Arquitetura%20.jpg)
 
 E o funcionamento desta API pode ser descrito da seguinte forma:
-![Funcionamento da API](https://github.com/VictorJSSantos/Modulo-1/blob/main/API%20-%20Funcionamento%20Interno.jpg)
 
-# Desenho de arquitetura do projeto
+![Funcionamento da API](https://github.com/VictorJSSantos/Modulo-1/blob/main/API%20-%20Funcionamento%20Interno.jpg)
 
 
