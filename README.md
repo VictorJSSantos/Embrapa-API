@@ -42,9 +42,13 @@ O projeto tem os arquivos principais, relacionados ao próprio funcionamento den
 
 Por fim, temos também a pasta "routes", esta pasta contém os arquivos que simbolizam todas as rotas. Cada rota foi separada em um arquivo com o motivo de facilitar a manutenção e a tornar fácil a identificação de quais rotas são tratadas em cada arquivo.
 
-# Fluxo da API
+# Arquitetura da API
+De forma geral, a arquitetura da API é a seguinte:
 
-![Fluxo desta API](https://github.com/VictorJSSantos/Modulo-1/blob/main/Module%201%20-%20API%20Architeture%20Design.jpg)
+![Arquitetura da API Embrapa](https://github.com/VictorJSSantos/Modulo-1/blob/main/API%20-%20Arquitetura%20.jpg)
+
+E o funcionamento desta API pode ser descrito da seguinte forma:
+![Funcionamento da API](https://github.com/VictorJSSantos/Modulo-1/blob/main/API%20-%20Funcionamento%20Interno.jpg)
 
 # Desenho de arquitetura do projeto
 
