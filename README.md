@@ -46,7 +46,7 @@ Por fim, temos também a pasta "routes", esta pasta contém os arquivos que simb
 
 # Pré-requisitos
 
-Python - Versão >= 3.9
+Python - Versão >= 3.9 a <= 3.11
 
 
 
