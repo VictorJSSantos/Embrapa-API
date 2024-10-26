@@ -48,7 +48,6 @@ Por fim, temos também a pasta "routes", esta pasta contém os arquivos que simb
 
 Python - Versão >= 3.9
 
-Se não for possível usar essas versões se atentar as dependências que estão no requirements.txt
 
 
 # Configuração do Ambiente
