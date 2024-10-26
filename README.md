@@ -46,29 +46,34 @@ Por fim, temos também a pasta "routes", esta pasta contém os arquivos que simb
 
 # Pré-requisitos
 
-Versão do Python 3.9 ou superior
+Python - Versão >= 3.9
+
 Se não for possível usar essas versões se atentar as dependências que estão no requirements.txt
 
 
-# Como usar a aplicação
+# Configuração do Ambiente
 
-Realize o clone do projeto no git:
-  git clone https://github.com/VictorJSSantos/Modulo-1.git
+1. Realize o clone do repositório:
+  > git clone https://github.com/VictorJSSantos/Modulo-1.git
 
-Criando o ambiente virtual: 
-  python -m venv venv
+2. Recomendado:: Crie o ambiente virtual: 
+  > python -m venv venv
 
-Ativando o ambiente virtual: 
-  venv\Scripts\activate
+3. Ativando o ambiente virtual: 
+No Windows:
+  > venv\Scripts\activate
+No Linux:
+  > source venv/bin/activate
 
+4. Configure o interpretador python no ambiente virtual:
 Ctrl + Shift + P para abrir a paleta de comandos.
-  Digite Python: Select Interpreter e escolha o Python dentro da pasta venv.
+  > Digite Python: Select Interpreter e escolha o Python dentro da pasta venv.
 
-Atualize o pip para garantir a instalação devida das dependencias 
-  python -m pip install --upgrade pip
+5. Atualize o pip para garantir a instalação devida das dependências:
+  > python -m pip install --upgrade pip
 
-Instale as depências
-  pip install -r requirements.txt
+5. Instale as dependências:
+  > pip install -r requirements.txt
 
 
 
