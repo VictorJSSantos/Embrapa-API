@@ -17,7 +17,7 @@ class ProcessamentoSubModelo(str, Enum):
     subopt_01 = "Viníferas"
     subopt_02 = "Americanas e Híbridas"
     subopt_03 = "Uvas de Mesa"
-    subpot_04 = "Sem Classificação"
+    subopt_04 = "Sem Classificação"
 
 
 objB = ProcessamentoSubModelo["subopt_02"]
