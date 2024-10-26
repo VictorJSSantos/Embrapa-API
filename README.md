@@ -52,23 +52,23 @@ Se não for possível usar essas versões se atentar as dependências que estão
 
 # Como usar a aplicação
 
-## Realize o clone do projeto no git:
-git clone https://github.com/VictorJSSantos/Modulo-1.git
+Realize o clone do projeto no git:
+  git clone https://github.com/VictorJSSantos/Modulo-1.git
 
-## Criando o ambiente virtual: 
-python -m venv venv
+Criando o ambiente virtual: 
+  python -m venv venv
 
-## Ativando o ambiente virtual: 
-venv\Scripts\activate
+Ativando o ambiente virtual: 
+  venv\Scripts\activate
 
-## Ctrl + Shift + P para abrir a paleta de comandos.
-## Digite Python: Select Interpreter e escolha o Python dentro da pasta venv.
+Ctrl + Shift + P para abrir a paleta de comandos.
+  Digite Python: Select Interpreter e escolha o Python dentro da pasta venv.
 
-## Atualize o pip para garantir a instalação devida das dependencias 
-python -m pip install --upgrade pip
+Atualize o pip para garantir a instalação devida das dependencias 
+  python -m pip install --upgrade pip
 
-## Instale as depências
-pip install -r requirements.txt
+Instale as depências
+  pip install -r requirements.txt
 
 
 
