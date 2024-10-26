@@ -42,6 +42,39 @@ O projeto tem os arquivos principais, relacionados ao próprio funcionamento den
 
 Por fim, temos também a pasta "routes", esta pasta contém os arquivos que simbolizam todas as rotas. Cada rota foi separada em um arquivo com o motivo de facilitar a manutenção e a tornar fácil a identificação de quais rotas são tratadas em cada arquivo.
 
+
+
+# Pré-requisitos
+
+Versão do Python 3.9 ou superior
+Se não for possível usar essas versões se atentar as dependências que estão no requirements.txt
+
+
+# Como usar a aplicação
+### Realize o clone do projeto no git:
+git clone https://github.com/VictorJSSantos/Modulo-1.git
+
+### Criando o ambiente virtual: 
+python -m venv venv
+
+### Ativando o ambiente virtual: 
+venv\Scripts\activate
+
+### Ctrl + Shift + P para abrir a paleta de comandos.
+### Digite Python: Select Interpreter e escolha o Python dentro da pasta venv.
+
+### Atualize o pip para garantir a instalação devida das dependencias 
+python -m pip install --upgrade pip
+
+### Instale as depências
+pip install -r requirements.txt
+
+![image](https://github.com/user-attachments/assets/c53f8463-098d-4243-a5a7-2eb2bc1afa09)
+
+
+
+
+
 # Arquitetura da API
 De forma geral, a arquitetura da API é a seguinte:
 
