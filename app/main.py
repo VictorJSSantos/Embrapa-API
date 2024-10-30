@@ -19,6 +19,7 @@ from app.routes.home import router as home
 from app.routes.login import router as login
 from app.routes.production import router as production
 from app.routes.sales import router as sales
+from app.routes.manufacturing import router as manufacturing
 from app.routes.imports import router as imports
 from app.routes.exports import router as exports
 
@@ -29,6 +30,6 @@ transformar = Transform()
 requisitar = Requisition()
 
 # Importando as rotas dos seus respectivos arquivos e adicionando no app.
-routers = [home, login, production, sales, imports, exports]  #   ]
+routers = [home, login, production, sales, manufacturing, imports, exports]  #   ]
 for router in routers:
     app.include_router(router)

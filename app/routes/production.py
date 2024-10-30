@@ -34,7 +34,7 @@ async def get_data(
 
     area = retornar_name_do_model(Model=ProducaoModelo)
     url = requisitar.criar_link(ano=ano, area=area)
-    data = requisitar.requisicao_get(url=url)
+    data = await requisitar.requisicao_get(url=url)
     data = transformar.formatar_dados(data)
 
     return data

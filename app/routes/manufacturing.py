@@ -53,7 +53,7 @@ async def get_data():
     """
     area = retornar_name_do_model(Model=ProcessamentoModelo)
     resultados = await transformar.consultar_todas_as_areas(
-        area=area, Model=ProcessamentoSubModelo
+        area=area, SubModel=ProcessamentoSubModelo
     )
 
     return resultados

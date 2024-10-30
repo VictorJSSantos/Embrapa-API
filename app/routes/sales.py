@@ -32,7 +32,7 @@ async def get_data(
         ano=ano,
         area=area,
     )
-    data = requisitar.requisicao_get(url=url)
+    data = await requisitar.requisicao_get(url=url)
     data = transformar.formatar_dados(data)
 
     return data

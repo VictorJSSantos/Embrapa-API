@@ -33,14 +33,14 @@ async def get_data(
     area = retornar_name_do_model(Model=ImportacaoModelo)
     subarea = retornar_name_do_model(Model=ImportacaoSubModelo)
     url = requisitar.criar_link(ano=ano, area=area, subarea=subarea)
-    data = requisitar.requisicao_get(url=url)
+    data = await requisitar.requisicao_get(url=url)
     data = transformar.formatar_dados(data)
 
     return data
 
 
 @router.get(
-    "/consulta/exportacao/{subarea}/token",
+    "/consulta/exportacao/token",
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Exportação de <b>todos os anos</b> para uma das subareas.",
     tags=["Exportação"],
@@ -52,7 +52,7 @@ async def get_data():
     """
     area = retornar_name_do_model(Model=ExportacaoModelo)
     resultados = await transformar.consultar_todas_as_areas(
-        area=area, Model=ExportacaoSubModelo
+        area=area, SubModel=ExportacaoSubModelo
     )
 
     return resultados

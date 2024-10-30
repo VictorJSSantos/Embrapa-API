@@ -87,11 +87,11 @@ class Transform(Requisition):
                 tds_em_trs, columns=["País", "Quantidade (L.)", "Valor (US$)"]
             )
 
-        return df
+        return df.to_dict(orient="dict")
 
     async def consultar_todo_periodo(self, area, subarea=None):
         ############################# AQUI TEM QUE AJUSTAR O PERÌODO PARA 2023 ##################################
-        lista_de_periodos = [i for i in range(1970, 1972)]
+        lista_de_periodos = [i for i in range(1970, 2023)]
         ################################################# AJUSTAR ###############################################
 
         urls = [
@@ -112,12 +112,11 @@ class Transform(Requisition):
         return response
 
     async def consultar_todas_as_areas(self, area, SubModel):
-        data = []
+        data = {}
 
         for subarea in SubModel:
             response = await self.consultar_todo_periodo(
                 area=area, subarea=subarea.name
             )
             data[f"{subarea.name}"] = response
-            # data.append(response)
         return data
