@@ -35,12 +35,11 @@ O projeto foi feito tentando manter uma organização próxima ao indicado para 
 O projeto tem os arquivos principais, relacionados ao próprio funcionamento dentro da pasta "app", que irá conter algumas informações importantes, a seguir iremos explicar os arquivos e uma breve descrição do conteúdo:
 * main.py - Arquivo principal da aplicação sendo responsável pela chamada da aplicação;
 * models.py - Arquivo constituído de todas as classes (modelos) que simbolizam os parâmetros da consulta, tais como área e subárea, para realizar a consulta de forma correta;
-* schemas.py - Arquivo constituído dos schemas de validação, tanto para Input quanto para Output de cada requisição da API;
 * requisicao_http.py - Arquivo constituído da classe Requisition, criada de forma a facilitar a manutenção e execução das ações http;
 * transformar.py - Arquivo constituído da classe Transform, que irá servir para maiores manipulações de um resultado após a requisição http;
 * utils.py - Arquivo constituído de funções generalistas, que podem ser acessadas em outras partes do programa, com o foco de centralizar o uso e facilitar a manutenabilidade;
 
-Por fim, temos também a pasta "routes", esta pasta contém os arquivos que simbolizam todas as rotas. Cada rota foi separada em um arquivo com o motivo de facilitar a manutenção e a tornar fácil a identificação de quais rotas são tratadas em cada arquivo.
+Por fim, temos também as pastas "routes" e "schemas", ambas as pastas estão separadas de acordo com o contexto de aplicação, no caso deste trabalho cada rota e schema está separado por área (Produção, Processamento, Comercialização, etc.). O objetivo é aumentar a manutenabilidade do código e torná-lo mais próximo das boas práticas para projetos de criação de API's.
 
 
 
