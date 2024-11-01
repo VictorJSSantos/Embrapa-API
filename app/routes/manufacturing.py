@@ -33,6 +33,7 @@ async def get_data(
     """
 
     area = return_name_from_model(Model=ProcessamentoModelo)
+    subarea = return_name_from_model(Model=ProcessamentoSubModelo)
     url = request.create_url_link(year=year, area=area, subarea=subarea)
     data = await request.get_requisition(url=url)
     data = transform.format_data(data)

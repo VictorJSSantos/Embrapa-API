@@ -85,7 +85,7 @@ class Transform(Requisition):
 
     async def get_all_data(self, area, subarea=None):
         ############################# AQUI TEM QUE AJUSTAR O PERÌODO PARA 2023 ##################################
-        period_list = [i for i in range(1970, 2023)]
+        period_list = [i for i in range(1970, 1972)]
         ################################################# AJUSTAR ###############################################
 
         urls = [
