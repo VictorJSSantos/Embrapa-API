@@ -8,7 +8,7 @@ from typing import Annotated
 
 
 from app.utils import *  # create_jwt_token, verify_jwt_token,
-from app.schemas import TokenResponse, UserPayload
+from app.schemas.login_schema import *
 
 
 router = APIRouter()

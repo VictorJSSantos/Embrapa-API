@@ -7,6 +7,7 @@ from app.models import *
 from app.schemas import *
 from app.http_requisition import *
 from app.routes.login import *
+from app.schemas.exports_schema import *
 
 
 router = APIRouter()
@@ -20,6 +21,7 @@ transform = Transform()
     description="Requisitar dados de Exportação de derivados de uva por ano",
     tags=["Exportação"],
     summary="Obter dados de Exportação",
+    response_model=ExportsResponseModel,
 )
 async def get_data(
     year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
@@ -45,6 +47,7 @@ async def get_data(
     description="Requisitar dados de Exportação de <b>todos os anos</b> para uma das subareas.",
     tags=["Exportação"],
     summary="Obter dados de todos os anos de Exportação",
+    response_model=ExportsResponseModel,
 )
 async def get_data():
     """

@@ -4,9 +4,9 @@ from typing import Annotated
 from app.transform import Transform
 from app.utils import *
 from app.models import *
-from app.schemas import *
 from app.http_requisition import *
 from app.routes.login import *
+from app.schemas.production_schema import *
 
 
 router = APIRouter()
@@ -24,6 +24,7 @@ Rota de API que coleta dados de um ano específico os anos
     description="Requisitar dados de Produção de vinhos, sucos e derivados do Rio Grande do Sul por ano",
     tags=["Produção"],
     summary="Obter dados de Produção",
+    response_model=ProductionResponseModel,
 )
 async def get_data(
     year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
@@ -51,6 +52,7 @@ Rota de API que coleta dados de TODOS os anos - Foi limitado por causa da consan
     description="Requisitar dados de Produção de <b>todos os anos</b>",
     tags=["Produção"],
     summary="Obter dados de todos os anos de Produção",
+    response_model=ProductionResponseModel,
 )
 async def get_data():
     """
