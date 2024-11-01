@@ -46,13 +46,13 @@ def verify_jwt_token(token: str):
         raise HTTPException(status_code=401, detail="Token inválido.")
 
 
-def retornar_name_do_model(Model):
+def return_name_from_model(Model):
     model_names = [opt.name for opt in Model]
     return model_names[0]
 
 
-def transformar_dados_de_url_em_string(ano, area, subarea=None):
+def transform_input_into_string(year, area, subarea=None):
     if subarea:
-        return str(ano), str(area), str(subarea)
+        return str(year), str(area), str(subarea)
     else:
-        return str(ano), str(area), None
+        return str(year), str(area), None

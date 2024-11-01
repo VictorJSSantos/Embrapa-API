@@ -1,17 +1,17 @@
 from fastapi import Depends, Path, APIRouter
 from typing import Annotated
 
-from app.transformar import Transform
+from app.transform import Transform
 from app.utils import *
 from app.models import *
 from app.schemas import *
-from app.requisicao_http import *
+from app.http_requisition import *
 from app.routes.login import *
 
 
 router = APIRouter()
-requisitar = Requisition()
-transformar = Transform()
+request = Requisition()
+transform = Transform()
 
 """
 Rota de API que coleta dados de um ano específico os anos
@@ -19,23 +19,23 @@ Rota de API que coleta dados de um ano específico os anos
 
 
 @router.get(
-    "/consulta/producao/{ano}/token",
+    "/consulta/producao/{year}/token",
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Produção de vinhos, sucos e derivados do Rio Grande do Sul por ano",
     tags=["Produção"],
     summary="Obter dados de Produção",
 )
 async def get_data(
-    ano: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
+    year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
 ):
     """
     Rota protegida que irá retornar os dados de Produção
     """
 
-    area = retornar_name_do_model(Model=ProducaoModelo)
-    url = requisitar.criar_link(ano=ano, area=area)
-    data = await requisitar.requisicao_get(url=url)
-    data = transformar.formatar_dados(data)
+    area = return_name_from_model(Model=ProducaoModelo)
+    url = request.create_url_link(year=year, area=area)
+    data = await request.get_requisition(url=url)
+    data = transform.format_data(data)
 
     return data
 
@@ -56,8 +56,8 @@ async def get_data():
     """
     Rota protegida que irá retornar todos os dados de Produção
     """
-    area = retornar_name_do_model(Model=ProducaoModelo)
-    response = await transformar.consultar_todo_periodo(
+    area = return_name_from_model(Model=ProducaoModelo)
+    response = await transform.get_all_data(
         area=area,
     )
 

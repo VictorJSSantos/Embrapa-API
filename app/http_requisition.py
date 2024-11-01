@@ -11,11 +11,11 @@ logging.basicConfig(level=logging.INFO)
 class Requisition:
     def __init__(self):
         self.url = None
-        self.ano = None
+        self.year = None
         self.area = None
         self.subarea = None
 
-    async def requisicao_get(self, url):
+    async def get_requisition(self, url):
         async with httpx.AsyncClient() as client:
             for attempt in range(2):  # Tentar até 3 vezes
                 try:
@@ -37,17 +37,17 @@ class Requisition:
                     logging.error(f"Erro inesperado: {e}")
                     return None
 
-    def criar_link(self, ano, area, subarea=None):
-        ano, area, subarea = transformar_dados_de_url_em_string(
-            ano=ano, area=area, subarea=subarea
+    def create_url_link(self, year, area, subarea=None):
+        year, area, subarea = transform_input_into_string(
+            year=year, area=area, subarea=subarea
         )
 
         if not subarea:
-            url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?ano={str(ano)}&opcao={area}"
+            url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?ano={str(year)}&opcao={area}"
             self.url = url
             return self.url
 
         else:
-            url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao={subarea}&ano={ano}&opcao={area}"
+            url = f"http://vitibrasil.cnpuv.embrapa.br/index.php?subopcao={subarea}&ano={year}&opcao={area}"
             self.url = url
             return self.url

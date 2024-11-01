@@ -18,32 +18,26 @@ import pandas as pd
 
 
 from app.models import *
-from app.requisicao_http import Requisition
+from app.http_requisition import Requisition
 
 
 class Transform(Requisition):
 
     def __init__(self):
         super().__init__()
-        self.ano = None
+        self.year = None
         self.area = None
         self.subarea = None
         self.url = None
 
-    def adicionar_coluna(self, coluna):
-        self.columns = coluna
+    def add_column(self, column):
+        self.columns = column
 
-    def adicionar_dados(self, dados):
-        self.dados.append(dados)
-
-    def limpar_lista(self):
-        self.dados.clear()
-
-    async def get_dados(self, url):
-        response = await super().requisicao_get(url)
+    async def get_data(self, url):
+        response = await super().get_requisition(url)
         return response
 
-    def formatar_dados(self, response):
+    def format_data(self, response):
         soup = BeautifulSoup(response, "html.parser")
         soup = soup.find("thead").parent
         # df = pd.DataFrame()
@@ -89,34 +83,32 @@ class Transform(Requisition):
 
         return df.to_dict(orient="dict")
 
-    async def consultar_todo_periodo(self, area, subarea=None):
+    async def get_all_data(self, area, subarea=None):
         ############################# AQUI TEM QUE AJUSTAR O PERÌODO PARA 2023 ##################################
-        lista_de_periodos = [i for i in range(1970, 2023)]
+        period_list = [i for i in range(1970, 2023)]
         ################################################# AJUSTAR ###############################################
 
         urls = [
-            self.criar_link(ano=ano, area=area, subarea=subarea)
-            for ano in lista_de_periodos
+            self.create_url_link(year=year, area=area, subarea=subarea)
+            for year in period_list
         ]
         response = {}
 
-        for ano, url in zip(lista_de_periodos, urls):
-            data = await self.get_dados(url=url)
+        for year, url in zip(period_list, urls):
+            data = await self.get_data(url=url)
             if data is None:
-                print(f"Dados não encontrados para o ano {ano}. URL: {url}")
+                print(f"Dados não encontrados para o ano {year}. URL: {url}")
                 continue  # Pula para o próximo ano se não houver dados
-            data = self.formatar_dados(data)
+            data = self.format_data(data)
 
-            response[f"{ano}"] = data
+            response[f"{year}"] = data
 
         return response
 
-    async def consultar_todas_as_areas(self, area, SubModel):
+    async def get_data_from_all_areas(self, area, SubModel):
         data = {}
 
         for subarea in SubModel:
-            response = await self.consultar_todo_periodo(
-                area=area, subarea=subarea.name
-            )
+            response = await self.get_all_data(area=area, subarea=subarea.name)
             data[f"{subarea.name}"] = response
         return data
