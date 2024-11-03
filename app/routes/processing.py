@@ -22,20 +22,20 @@ transform = Transform()
     description="Requisitar dados de Quantidade de uvas processadas no Rio Grande do Sul por ano",
     tags=["Processamento"],
     summary="Obter dados de Pocessamento",
-    response_model=ProcessingResponseModel,
+    response_model=ProcessingDataComposition,
 )
 async def get_data(
     year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
     subarea: Annotated[
-        (ProcessamentoSubModelo | None), Path(title="Selecione a subárea de interessse")
+        (ProcessingSubModel | None), Path(title="Selecione a subárea de interessse")
     ],
 ):
     """
     Rota protegida que irá retornar os dados de Processamento
     """
 
-    area = return_name_from_model(Model=ProcessamentoModelo)
-    subarea = return_name_from_model(Model=ProcessamentoSubModelo)
+    area = return_name_from_model(Model=ProcessingModel)
+    subarea = return_name_from_model(Model=ProcessingSubModel)
     url = request.create_url_link(year=year, area=area, subarea=subarea)
     data = await request.get_requisition(url=url)
     data = transform.format_data(data)
@@ -55,9 +55,9 @@ async def get_data():
     """
     Rota protegida que irá retornar todos os dados de Processamento
     """
-    area = return_name_from_model(Model=ProcessamentoModelo)
+    area = return_name_from_model(Model=ProcessingModel)
     resultados = await transform.get_data_from_all_areas(
-        area=area, SubModel=ProcessamentoSubModelo
+        area=area, SubModel=ProcessingSubModel
     )
 
     return resultados

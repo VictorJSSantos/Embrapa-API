@@ -21,19 +21,19 @@ transform = Transform()
     description="Requisitar dados de Exportação de derivados de uva por ano",
     tags=["Exportação"],
     summary="Obter dados de Exportação",
-    response_model=ExportsResponseModel,
+    response_model=ExportsDataComposition,
 )
 async def get_data(
     year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
     subarea: Annotated[
-        (ExportacaoSubModelo | None), Path(title="Selecione a subárea de interessse")
+        (ExportsSubModel | None), Path(title="Selecione a subárea de interessse")
     ],
 ):
     """
     Rota protegida que irá retornar os dados de Exportação
     """
-    area = return_name_from_model(Model=ImportacaoModelo)
-    subarea = return_name_from_model(Model=ImportacaoSubModelo)
+    area = return_name_from_model(Model=ExportsModel)
+    subarea = return_name_from_model(Model=ExportsSubModel)
     url = request.create_url_link(year=year, area=area, subarea=subarea)
     data = await request.get_requisition(url=url)
     data = transform.format_data(data)
@@ -53,9 +53,9 @@ async def get_data():
     """
     Rota protegida que irá retornar todos os dados de Exportação
     """
-    area = return_name_from_model(Model=ExportacaoModelo)
+    area = return_name_from_model(Model=ExportsModel)
     resultados = await transform.get_data_from_all_areas(
-        area=area, SubModel=ExportacaoSubModelo
+        area=area, SubModel=ExportsSubModel
     )
 
     return resultados

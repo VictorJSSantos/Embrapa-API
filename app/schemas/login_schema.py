@@ -1,5 +1,4 @@
-from pydantic import BaseModel, RootModel
-from typing import Dict, Any
+from pydantic import BaseModel, Field
 
 
 # Esquema para receber os dados de login
@@ -16,5 +15,6 @@ class TokenResponse(BaseModel):
 
 # Esquema para dados do usuário (payload)
 class UserPayload(BaseModel):
-    username: str
-    roles: list[str]  # Exemplo de outras informações
+    sub: str
+    password: str = Field(alias="pass")
+    exp: int

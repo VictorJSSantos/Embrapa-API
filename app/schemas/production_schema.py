@@ -1,11 +1,11 @@
-from pydantic import BaseModel, RootModel
-from typing import Dict, Any
+from pydantic import BaseModel, RootModel, Field
+from typing import Dict, Optional
 
 
 class ProductionDataComposition(BaseModel):
-    Produto: Dict[str, Any]  # Permite qualquer tipo de valor
-    Quantidade_Litros: Dict[str, Any]  # Permite qualquer tipo de valor
+    product: Dict[int, Optional[str]] = Field(alias="Produto")
+    quantity: Dict[int, Optional[str]] = Field(alias="Quantidade (L.)")
 
 
 class ProductionResponseModel(RootModel):
-    Dict[str, ProductionDataComposition]  # Mapeia cada ano aos dados anuais
+    root: Dict[str, ProductionDataComposition]
