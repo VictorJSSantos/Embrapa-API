@@ -4,3 +4,4 @@ old/
 app/__pycache__/
 utils/
 others/
+.vercel
