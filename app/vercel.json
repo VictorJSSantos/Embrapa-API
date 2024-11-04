@@ -1,19 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "main.py",
-      "use": "@vercel/python"
+      "source": "/(.*)",
+      "destination": "/app/main"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "main.py"
-    }
-  ],
-  "env": {
-    "PYTHONPATH": "app/"
-}
-
+  ]
 }
