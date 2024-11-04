@@ -24,7 +24,7 @@ Rota de API que coleta dados de um ano específico os anos
     description="Requisitar dados de Produção de vinhos, sucos e derivados do Rio Grande do Sul por ano",
     tags=["Produção"],
     summary="Obter dados de Produção",
-    response_model=ProductionResponseModel,
+    response_model=ProductionDataComposition,
 )
 async def get_data(
     year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
@@ -33,7 +33,7 @@ async def get_data(
     Rota protegida que irá retornar os dados de Produção
     """
 
-    area = return_name_from_model(Model=ProducaoModelo)
+    area = return_name_from_model(Model=ProductionModel)
     url = request.create_url_link(year=year, area=area)
     data = await request.get_requisition(url=url)
     data = transform.format_data(data)
@@ -58,7 +58,7 @@ async def get_data():
     """
     Rota protegida que irá retornar todos os dados de Produção
     """
-    area = return_name_from_model(Model=ProducaoModelo)
+    area = return_name_from_model(Model=ProductionModel)
     response = await transform.get_all_data(
         area=area,
     )

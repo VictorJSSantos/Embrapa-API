@@ -1,11 +1,15 @@
-from pydantic import BaseModel, RootModel
-from typing import Dict, Any
+from pydantic import BaseModel, RootModel, Field
+from typing import Dict, Optional
 
 
 class ProcessingDataComposition(BaseModel):
-    Cultivar: Dict[str, Any]  # Permite qualquer tipo de valor
-    Quantidade_Kg: Dict[str, Any]  # Permite qualquer tipo de valor
+    cultivate: Dict[int, Optional[str]] = Field(alias="Cultivar", default=None)
+    quantity: Dict[int, Optional[str]] = Field(alias="Quantidade (Kg)")
+
+
+class SubareaData(RootModel):
+    root: Dict[int, ProcessingDataComposition]
 
 
 class ProcessingResponseModel(RootModel):
-    Dict[str, ProcessingDataComposition]  # Mapeia cada ano aos dados anuais
+    root: Dict[str, SubareaData]

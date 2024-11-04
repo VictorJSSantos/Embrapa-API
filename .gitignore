@@ -4,3 +4,5 @@ old/
 app/__pycache__/
 utils/
 others/
+.vercel
+response_data/

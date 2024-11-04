@@ -10,7 +10,7 @@ from app.models import *
 # Carregar as credenciais dos usuários do arquivo tokens.yaml
 def load_credentials():
     try:
-        with open("./data/tokens.yaml", "r") as file:
+        with open("../data/tokens.yaml", "r") as file:
             return yaml.safe_load(file)
     except Exception as e:
         raise HTTPException(

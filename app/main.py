@@ -16,11 +16,11 @@ from app.routes.exports import router as exports
 
 
 # Inicializando o FastAPI
-app = FastAPI(swagger_ui_parameters={"syntaxHighlight.theme": "obsidian"})
+app = FastAPI()
 transform = Transform()
 request = Requisition()
 
 # Importando as rotas dos seus respectivos arquivos e adicionando no app.
-routers = [home, login, production, sales, processing, imports, exports]  #   ]
+routers = [home, login, production, sales, processing, imports, exports]
 for router in routers:
     app.include_router(router)

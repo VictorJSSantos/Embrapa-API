@@ -1,12 +1,16 @@
-from pydantic import BaseModel, RootModel
-from typing import Dict, Any
+from pydantic import BaseModel, RootModel, Field
+from typing import Dict, Optional
 
 
 class ImportsDataComposition(BaseModel):
-    Paises: Dict[str, Any]
-    Quantidade_Kg: Dict[str, Any]  # Permite qualquer tipo de valor
-    Valor_USD: Dict[str, Any]  # Permite qualquer tipo de valor
+    countries: Dict[int, Optional[str]] = Field(alias="Países")
+    quantity: Dict[int, Optional[str]] = Field(alias="Quantidade (Kg)")
+    value: Dict[int, Optional[str]] = Field(alias="Valor (US$)")
+
+
+class SubareaData(RootModel):
+    root: Dict[int, ImportsDataComposition]
 
 
 class ImportsResponseModel(RootModel):
-    Dict[str, ImportsDataComposition]  # Mapeia cada ano aos dados anuais
+    root: Dict[str, SubareaData]

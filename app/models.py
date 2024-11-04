@@ -1,15 +1,15 @@
 from enum import Enum
 
 
-class ProducaoModelo(str, Enum):
+class ProductionModel(str, Enum):
     opt_02 = "Produção"
 
 
-class ProcessamentoModelo(str, Enum):
+class ProcessingModel(str, Enum):
     opt_03 = "Processamento"
 
 
-class ProcessamentoSubModelo(str, Enum):
+class ProcessingSubModel(str, Enum):
 
     subopt_01 = "Viníferas"
     subopt_02 = "Americanas e Híbridas"
@@ -17,15 +17,15 @@ class ProcessamentoSubModelo(str, Enum):
     subopt_04 = "Sem Classificação"
 
 
-class ComercializacaoModelo(str, Enum):
+class SalesModel(str, Enum):
     opt_04 = "Comercialização"
 
 
-class ImportacaoModelo(str, Enum):
+class ImportsModel(str, Enum):
     opt_05 = "Importação"
 
 
-class ImportacaoSubModelo(str, Enum):
+class ImportsSubModel(str, Enum):
     subopt_01 = "Vinhos de Mesa"
     subopt_02 = "Espumantes"
     subopt_03 = "Uvas Frescas"
@@ -33,11 +33,11 @@ class ImportacaoSubModelo(str, Enum):
     subopt_05 = "Suco de Uva"
 
 
-class ExportacaoModelo(str, Enum):
+class ExportsModel(str, Enum):
     opt_06 = "Exportação"
 
 
-class ExportacaoSubModelo(str, Enum):
+class ExportsSubModel(str, Enum):
     subopt_01 = "Vinhos de Mesa"
     subopt_02 = "Espumantes"
     subopt_03 = "Uvas Frescas"

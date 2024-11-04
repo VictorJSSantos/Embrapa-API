@@ -20,7 +20,7 @@ transform = Transform()
     description="Requisitar dados de Comercialização de vinhos e derivados no Rio Grande do Sul por ano",
     tags=["Comercialização"],
     summary="Obter dados de Comercialização",
-    response_model=SalesResponseModel,
+    response_model=SalesDataComposition,
 )
 async def get_data(
     year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)]
@@ -29,7 +29,7 @@ async def get_data(
     Rota protegida que irá retornar os dados de Comercialização
     """
 
-    area = return_name_from_model(Model=ComercializacaoModelo)
+    area = return_name_from_model(Model=SalesModel)
     url = request.create_url_link(
         year=year,
         area=area,
@@ -52,7 +52,7 @@ async def get_data():
     """
     Rota protegida que irá retornar todos os dados de Comercialização
     """
-    area = return_name_from_model(Model=ComercializacaoModelo)
+    area = return_name_from_model(Model=SalesModel)
     resultados = await transform.get_all_data(
         area=area,
     )
