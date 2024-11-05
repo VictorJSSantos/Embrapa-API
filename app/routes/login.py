@@ -9,7 +9,7 @@ from typing import Annotated
 
 from app.utils import *
 from app.schemas.login_schema import *
-
+import os
 
 router = APIRouter()
 
@@ -32,20 +32,15 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
     """
     Rota de login que valida as credenciais e retorna um token JWT.
     """
-    user_data = next(
-        (
-            user
-            for user in CREDENTIALS["users"]
-            if user["username"] == form_data.username
-            and user["password"] == form_data.password
-        ),
-        None,
-    )
+    # Obtenha as credenciais do ambiente
+    username = os.getenv("USERNAME")
+    password = os.getenv("PASSWORD")
 
-    if not user_data:
+    # Verifique as credenciais
+    if form_data.username != username or form_data.password != password:
         raise HTTPException(status_code=400, detail="Usuário ou senha inválidos.")
 
-    token = create_jwt_token(user_data["username"], user_data["password"])
+    token = create_jwt_token(username, password)
     return {"access_token": token, "token_type": "bearer"}
 
 

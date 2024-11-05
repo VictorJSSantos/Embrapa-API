@@ -2,24 +2,13 @@ import datetime
 from fastapi import HTTPException
 import jwt
 import yaml
+import os
 
 
 from app.models import *
 
 
-# Carregar as credenciais dos usuários do arquivo tokens.yaml
-def load_credentials():
-    try:
-        with open("../data/tokens.yaml", "r") as file:
-            return yaml.safe_load(file)
-    except Exception as e:
-        raise HTTPException(
-            status_code=500, detail=f"Erro ao carregar credenciais: {e}"
-        )
-
-
-# CREDENTIALS = load_credentials()
-# SECRET_KEY = CREDENTIALS["SECRET_KEY"]
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 
 # Função para criar o token JWT
