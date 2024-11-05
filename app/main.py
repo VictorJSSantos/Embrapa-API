@@ -21,16 +21,7 @@ from app.routes.exports import router as exports
 
 # Inicializando o FastAPI
 app = FastAPI()
-# transform = TransformRequisition()
-# request = Requisition()
 
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],  # Altere isso para permitir apenas os domínios desejados
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
 
 # Importando as rotas dos seus respectivos arquivos e adicionando no app.
 routers = [home, login, production, sales, processing, imports, exports]
