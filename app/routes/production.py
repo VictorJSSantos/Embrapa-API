@@ -1,7 +1,7 @@
 from fastapi import Depends, Path, APIRouter
 from typing import Annotated
 
-from app.transform import Transform
+from app.transform import TransformRequisition
 from app.utils import *
 from app.models import *
 from app.http_requisition import *
@@ -11,7 +11,7 @@ from app.schemas.production_schema import *
 
 router = APIRouter()
 request = Requisition()
-transform = Transform()
+transform = TransformRequisition()
 
 """
 Rota de API que coleta dados de um ano específico os anos

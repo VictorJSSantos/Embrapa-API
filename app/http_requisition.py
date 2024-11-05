@@ -4,11 +4,13 @@ import httpx
 import logging
 import asyncio
 from app.utils import *
-from app.transform import Transform
+
+# from app.transform import TransformRequisition
 
 logging.basicConfig(level=logging.INFO)
 
-transform = Transform()
+# transform = TransformRequisition()
+
 
 class Requisition:
     def __init__(self):
@@ -40,7 +42,7 @@ class Requisition:
                     return None
 
     def create_url_link(self, year, area, subarea=None):
-        year, area, subarea = transform.transform_input_into_string(
+        year, area, subarea = transform_input_into_string(
             year=year, area=area, subarea=subarea
         )
 

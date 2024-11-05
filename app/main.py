@@ -1,8 +1,10 @@
 from fastapi import FastAPI, HTTPException, Depends, Path
-from fastapi.staticfiles import StaticFiles
 
-from app.transform import Transform
-from app.http_requisition import Requisition
+# from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
+
+# from app.transform import TransformRequisition
+# from app.http_requisition import Requisition
 
 # from models import *
 # from utils import *
@@ -18,9 +20,17 @@ from app.routes.exports import router as exports
 
 
 # Inicializando o FastAPI
-app = FastAPI()
-transform = Transform()
-request = Requisition()
+app = FastAPI(openapi_url="/openapi.json")
+# transform = TransformRequisition()
+# request = Requisition()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Altere isso para permitir apenas os domínios desejados
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Importando as rotas dos seus respectivos arquivos e adicionando no app.
 routers = [home, login, production, sales, processing, imports, exports]

@@ -2,7 +2,7 @@ from fastapi import Depends, Path, APIRouter
 from typing import Annotated
 
 
-from app.transform import Transform
+from app.transform import TransformRequisition
 from app.utils import *
 from app.models import *
 from app.schemas import *
@@ -13,7 +13,7 @@ from app.schemas.processing_schema import *
 
 router = APIRouter()
 request = Requisition()
-transform = Transform()
+transform = TransformRequisition()
 
 
 @router.get(

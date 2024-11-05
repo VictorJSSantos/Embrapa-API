@@ -18,13 +18,14 @@ import pandas as pd
 
 
 from app.models import *
-from app.http_requisition import Requisition
 
 
-class Transform(Requisition):
+class TransformRequisition:
 
     def __init__(self):
-        super().__init__()
+        from app.http_requisition import Requisition
+
+        self.requisition = Requisition()
         self.year = None
         self.area = None
         self.subarea = None
@@ -34,7 +35,7 @@ class Transform(Requisition):
         self.columns = column
 
     async def get_data(self, url):
-        response = await super().get_requisition(url)
+        response = await self.requisition.get_requisition(url)
         return response
 
     def format_data(self, response):
@@ -67,7 +68,7 @@ class Transform(Requisition):
         ################################################# AJUSTAR ###############################################
 
         urls = [
-            self.create_url_link(year=year, area=area, subarea=subarea)
+            self.requisition.create_url_link(year=year, area=area, subarea=subarea)
             for year in period_list
         ]
         response = {}
