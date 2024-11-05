@@ -27,7 +27,7 @@ transform = Transform()
 async def get_data(
     year: Annotated[int, Path(title="Selecione o ano de interesse", ge=1970, le=2022)],
     subarea: Annotated[
-        (ProcessingSubModel | None), Path(title="Selecione a subárea de interessse")
+        ProcessingSubModel, Path(title="Selecione a subárea de interessse")
     ],
 ):
     """

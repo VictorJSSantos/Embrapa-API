@@ -1,9 +1,11 @@
 from fastapi import FastAPI, HTTPException, Depends, Path
+from fastapi.staticfiles import StaticFiles
 
 from app.transform import Transform
 from app.http_requisition import Requisition
-from app.models import *
-from app.utils import *
+
+# from models import *
+# from utils import *
 
 
 from app.routes.home import router as home

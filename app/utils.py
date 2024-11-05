@@ -18,8 +18,8 @@ def load_credentials():
         )
 
 
-CREDENTIALS = load_credentials()
-SECRET_KEY = CREDENTIALS["SECRET_KEY"]
+# CREDENTIALS = load_credentials()
+# SECRET_KEY = CREDENTIALS["SECRET_KEY"]
 
 
 # Função para criar o token JWT
