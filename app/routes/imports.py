@@ -16,7 +16,7 @@ transform = TransformRequisition()
 
 
 @router.get(
-    "c",
+    "/consulta/importacao/{subarea}/{year}/token",
     dependencies=[Depends(BearerToken())],
     description="Requisitar dados de Importação de derivados de uva por ano",
     tags=["Importação"],
