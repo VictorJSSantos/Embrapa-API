@@ -12,7 +12,6 @@ partir daqui e sobrescrever suas funcionalidades
 
 """
 
-from json import load
 from bs4 import BeautifulSoup
 import pandas as pd
 
@@ -64,7 +63,7 @@ class TransformRequisition:
 
     async def get_all_data(self, area, subarea=None):
         ############################# AQUI TEM QUE AJUSTAR O PERÌODO PARA 2023 ##################################
-        period_list = [i for i in range(1970, 1972)]
+        period_list = [i for i in range(1970, 2022)]
         ################################################# AJUSTAR ###############################################
 
         urls = [

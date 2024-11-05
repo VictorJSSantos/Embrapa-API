@@ -1,7 +1,6 @@
 import datetime
 from fastapi import HTTPException
 import jwt
-import json
 import os
 
 

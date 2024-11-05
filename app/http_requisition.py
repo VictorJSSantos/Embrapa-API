@@ -1,15 +1,14 @@
 """Essa será a Classe Requisition HTTP"""
 
+import asyncio
 import httpx
 import logging
-import asyncio
+
+
 from app.utils import *
 
-# from app.transform import TransformRequisition
 
 logging.basicConfig(level=logging.INFO)
-
-# transform = TransformRequisition()
 
 
 class Requisition:

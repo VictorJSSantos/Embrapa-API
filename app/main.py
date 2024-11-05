@@ -1,15 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends, Path
 
-# from fastapi.staticfiles import StaticFiles
-from fastapi.middleware.cors import CORSMiddleware
-
-# from app.transform import TransformRequisition
-# from app.http_requisition import Requisition
-
-# from models import *
-# from utils import *
-
-
 from app.routes.home import router as home
 from app.routes.login import router as login
 from app.routes.production import router as production
