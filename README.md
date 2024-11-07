@@ -1,3 +1,6 @@
+> [!NOTE]  
+> Para acessar o README em Português-BR acesse este [link](https://github.com/VictorJSSantos/Embrapa-API/blob/main/README.pt-br.md)
+
 # Overview 
 
 This project is an API under development to access data from Embrapa regarding the grape production process (and other information as well; see the link for detailed data) in the State of Rio Grande do Sul, available at this link.
