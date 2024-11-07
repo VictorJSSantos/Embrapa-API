@@ -47,8 +47,7 @@ utils.py - The file containing general-purpose functions that can be accessed ac
 
 Finally, we also have the "routes" and "schemas" folders. Both folders are separated according to the application context. For this project, each route and schema is organized by contexts (Production, Processing, Commercialization, etc.). The goal is to improve code maintainability and make it more aligned with best practices for API development.
 
-# 
-Prerequisites
+# Prerequisites
 
 Python - Version >= 3.9 to <= 3.11
 
