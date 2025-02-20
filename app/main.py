@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends, Path
+from fastapi import FastAPI
 
 from app.routes.home import router as home
 from app.routes.login import router as login

@@ -30,7 +30,7 @@ async def get_data(
     ],
 ):
     """
-    Rota protegida que irá retornar os dados de Importação
+    Rota protegida que irá retornar todos os dados de todos os anos da subárea Importação.
     """
     area = return_name_from_model(Model=ImportsModel)
     subarea = return_name_from_model(Model=ImportsSubModel)

@@ -1,6 +1,7 @@
 from fastapi import Depends, Path, APIRouter
 from typing import Annotated
 
+
 from app.transform import TransformRequisition
 from app.utils import *
 from app.models import *
@@ -56,7 +57,7 @@ Rota de API que coleta dados de TODOS os anos - Foi limitado por causa da consan
 )
 async def get_data():
     """
-    Rota protegida que irá retornar todos os dados de Produção
+    Rota protegida que irá retornar todos os dados de todos os anos da subárea Produção.
     """
     area = return_name_from_model(Model=ProductionModel)
     response = await transform.get_all_data(

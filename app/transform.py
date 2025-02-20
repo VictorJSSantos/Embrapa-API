@@ -1,19 +1,4 @@
-""" Aqui será onde será criada a classe para o Extrator de Dados do site
-Coisas que ele precisa fazer são:
-variáveis:
-como é classe, self (para poder instanciar numa variável), ano, area e subarea
-
-métodos: 
-validar ano, validar area, validar subarea
-adicionar a registros para salvar, criar um dataframe com resultados
-
-Vai encapsular a cls Requisition para poder fazer a requisição a 
-partir daqui e sobrescrever suas funcionalidades
-
-"""
-
 from bs4 import BeautifulSoup
-import pandas as pd
 
 
 from app.models import *
@@ -41,31 +26,20 @@ class TransformRequisition:
         soup = BeautifulSoup(response, "html.parser")
         soup = soup.find("thead").parent
         headers = [th.text.strip() for th in soup.find_all("th")]
-        # Inicializa uma lista para armazenar os resultados
-        data_by_row_to_list = []
-        df = pd.DataFrame()
+        formatted_data = {header: {} for header in headers}
 
-        # Itera sobre as linhas da tabela
-        for tr in soup.find_all("tr"):
-            # Para cada linha, extrai o texto de cada célula (td)
+        for row_index, tr in enumerate(soup.find_all("tr")):
             tds = tr.find_all("td")
+            for col_index, td in enumerate(tds):
+                header = headers[col_index]
+                formatted_data[header][str(row_index)] = (
+                    td.text.strip().replace("\n", "") if td.text.strip() else None
+                )
 
-            # Adiciona o resultado como um array de elementos
-            row_value_list = [
-                td.text.strip().replace("\n", "") for td in tds
-            ]  # Formata cada td
-
-            data_by_row_to_list.append(row_value_list)
-
-        df = pd.DataFrame(data_by_row_to_list, columns=headers)
-
-        return df.to_dict(orient="dict")
+        return formatted_data
 
     async def get_all_data(self, area, subarea=None):
-        ############################# AQUI TEM QUE AJUSTAR O PERÌODO PARA 2023 ##################################
         period_list = [i for i in range(1970, 2022)]
-        ################################################# AJUSTAR ###############################################
-
         urls = [
             self.requisition.create_url_link(year=year, area=area, subarea=subarea)
             for year in period_list
@@ -73,10 +47,13 @@ class TransformRequisition:
         response = {}
 
         for year, url in zip(period_list, urls):
+
             data = await self.get_data(url=url)
+
             if data is None:
                 print(f"Dados não encontrados para o ano {year}. URL: {url}")
-                continue  # Pula para o próximo ano se não houver dados
+                continue
+
             data = self.format_data(data)
 
             response[f"{year}"] = data

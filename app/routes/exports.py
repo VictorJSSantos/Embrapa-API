@@ -51,7 +51,7 @@ async def get_data(
 )
 async def get_data():
     """
-    Rota protegida que irá retornar todos os dados de Exportação
+    Rota protegida que irá retornar todos os dados de todos os anos da subárea Exportação.
     """
     area = return_name_from_model(Model=ExportsModel)
     resultados = await transform.get_data_from_all_areas(

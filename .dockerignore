@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.git/
+logs/
+data
+old/
+others/
+response_data/
+venv/
+data/
+*.jpg
+render.yaml
+.python-version
+.vercel

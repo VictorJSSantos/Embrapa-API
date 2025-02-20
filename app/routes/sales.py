@@ -1,11 +1,11 @@
 from fastapi import Depends, Path, APIRouter
 
+
 from app.transform import TransformRequisition
 from app.utils import *
 from app.models import *
 from app.http_requisition import *
 from app.routes.login import *
-
 from app.schemas.sales_schema import *
 
 
@@ -50,7 +50,7 @@ async def get_data(
 )
 async def get_data():
     """
-    Rota protegida que irá retornar todos os dados de Comercialização
+    Rota protegida que irá retornar todos os dados de todos os anos da subárea Comercialização.
     """
     area = return_name_from_model(Model=SalesModel)
     resultados = await transform.get_all_data(
